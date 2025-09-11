@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import videoFile from '../assets/images/hero-video.mp4';
 
 const VideoHero = () => {
+  const videoRef = useRef(null);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -17,118 +18,102 @@ const VideoHero = () => {
     
     checkScreenSize();
     window.addEventListener('resize', checkScreenSize);
-    return () => window.removeEventListener('resize', checkScreenSize);
+
+    const video = videoRef.current;
+    
+    if (video) {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.volume = 0;
+      video.setAttribute('playsinline', 'true');
+      video.setAttribute('webkit-playsinline', 'true');
+      video.preload = 'auto';
+      video.poster = '';
+      video.loading = 'eager';
+      
+      const playVideo = async () => {
+        try {
+          await video.play();
+        } catch (error) {
+          console.log('Autoplay failed, will play on user interaction');
+          const enableVideo = async () => {
+            try {
+              await video.play();
+              document.removeEventListener('click', enableVideo);
+              document.removeEventListener('touchstart', enableVideo);
+            } catch (err) {
+              console.log('Video play failed:', err);
+            }
+          };
+          
+          document.addEventListener('click', enableVideo, { once: true });
+          document.addEventListener('touchstart', enableVideo, { once: true });
+        }
+      };
+      
+      setTimeout(playVideo, 500);
+    }
+
+    return () => {
+      window.removeEventListener('resize', checkScreenSize);
+    };
   }, []);
 
   const getContainerHeight = () => {
-    if (typeof window === 'undefined') return 'calc(100vh - 96px)';
+    if (typeof window === 'undefined') return '100vh';
     
     const width = window.innerWidth;
     const height = window.innerHeight;
     
-    const isIPad = (
-      (width === 768 && height === 1024) ||
-      (width === 820 && height === 1180) ||
-      (width === 834 && height === 1194) ||
-      (width === 1024 && height === 1366) ||
-      (height === 768 && width === 1024) ||
-      (height === 820 && width === 1180) ||
-      (height === 834 && width === 1194) ||
-      (height === 1024 && width === 1366) ||
-      (navigator.userAgent.includes('iPad') || 
-       (navigator.userAgent.includes('Macintosh') && 'ontouchend' in document))
-    );
-    
     if (width < 768) {
-      return Math.min((height - 96) * 0.6, 500);
-    } else if (isIPad) {
-      return Math.min(width * 0.5625, (height - 96) * 0.6);
+      return Math.min(height * 0.6, 500);
     } else if (width < 1024) {
-      return Math.min((height - 96) * 0.7, 600);
+      return Math.min(height * 0.7, 600);
     } else {
-      return 'calc(100vh - 96px)';
+      return '100vh';
     }
   };
 
-  // Different approach for small screens vs larger screens
-  if (isSmallScreen) {
-    return (
-      <div 
-        className="w-full relative bg-black"
-        style={{ 
-          marginTop: '96px', 
-          height: getContainerHeight(),
-          minHeight: '300px'
-        }}
-      >
-        <div 
-          className="absolute inset-0"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            overflow: 'hidden'
-          }}
-        >
-          <video
-            src={videoFile}
-            style={{
-              height: '100%',
-              width: 'auto',
-              maxWidth: 'none',
-              objectFit: 'cover',
-              objectPosition: 'center center',
-              transform: 'translateZ(0)',
-              backfaceVisibility: 'hidden',
-              WebkitTransform: 'translateZ(0)',
-              WebkitBackfaceVisibility: 'hidden',
-            }}
-            autoPlay
-            muted
-            loop
-            playsInline
-            title="Be Star Entertainment Video"
-          />
-        </div>
-        
-        {/* Gradient overlay */}
-        <div className="absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-black/40 to-transparent z-10" />
-      </div>
-    );
-  }
-
-  // For larger screens, use the original approach
   return (
     <div 
-      className="w-full overflow-hidden relative" 
+      className="relative overflow-hidden bg-black"
       style={{ 
-        marginTop: '96px', 
         height: getContainerHeight(),
-        minHeight: '400px'
+        minHeight: isSmallScreen ? '300px' : '400px',
+        width: '100vw',
+        marginLeft: 'calc(-50vw + 50%)',
+        marginRight: 'calc(-50vw + 50%)'
       }}
     >
-      <video
-        src={videoFile}
-        className="w-full h-full"
-        style={{
-          width: '100%',
-          height: '100%',
-          border: 'none',
-          objectFit: 'cover',
-          objectPosition: 'center center',
-          transform: 'translateZ(0)',
-          backfaceVisibility: 'hidden',
-          WebkitTransform: 'translateZ(0)',
-          WebkitBackfaceVisibility: 'hidden',
-        }}
-        autoPlay
-        muted
-        loop
-        playsInline
-        title="Be Star Entertainment Video"
-      />
+      <div className="absolute inset-0">
+        <video
+          ref={videoRef}
+          className="w-full h-full object-cover"
+          src={videoFile}
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          controls={false}
+        />
+      </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-1/4 sm:h-1/3 md:h-1/3 lg:h-1/3 bg-gradient-to-t from-black/40 to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 w-full h-1/4 sm:h-1/3 bg-gradient-to-t from-black/40 to-transparent" />
+
+      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 left-1/2 transform -translate-x-1/2 z-20">
+        <div className="flex flex-col items-center">
+          <span className="text-white text-xs sm:text-sm md:text-base mb-1 sm:mb-2 tracking-widest font-medium drop-shadow-md">SCROLL</span>
+          <div className="relative">
+            <div className="absolute -inset-1 rounded-full bg-sky-500/40 animate-pulse"></div>
+            <div className="animate-bounce bg-sky-600/90 p-1.5 sm:p-2 rounded-full shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-7 lg:w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
