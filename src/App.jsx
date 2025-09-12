@@ -115,8 +115,8 @@ function App() {
         />
       </div>
 
-      {/* WhatsApp Chatbot - Added at the end */}
-      <ChatBot />
+      {/* WhatsApp Chatbot - Corrected component name */}
+      <WhatsAppChatBot />
     </>
   );
 }
