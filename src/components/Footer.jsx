@@ -96,7 +96,7 @@ const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
                 <a href="#contact" className="text-slate-300 hover:text-white transition-all duration-300 text-sm font-medium hover:translate-x-1 inline-block relative group">
                   <span className="absolute left-0 top-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 group-hover:w-4 transition-all duration-300 -translate-y-1/2"></span>
                   <span className="group-hover:ml-6 transition-all duration-300">Contact</span>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
