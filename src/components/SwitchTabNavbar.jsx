@@ -18,7 +18,7 @@ const SwitchTabNavbar = ({ activeTab, setActiveTab }) => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navbarHeight = 96;
+      const navbarHeight = 120; // Increased navbar height
       const elementPosition = element.offsetTop - navbarHeight;
       
       window.scrollTo({
@@ -61,28 +61,31 @@ const SwitchTabNavbar = ({ activeTab, setActiveTab }) => {
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24">
+        <div className={`flex items-center justify-between transition-all duration-300 ${
+          isScrolled ? 'h-20' : 'h-32'
+        }`}>
           
-          {/* Logo Section */}
+          {/* Logo Section - Much Larger */}
           <div className="flex-shrink-0 flex items-center">
             <img
               src={videoFile}
               alt="Be Star Entertainment"
               className={`object-contain transition-all duration-300 ${
                 isScrolled 
-                  ? 'h-20 w-auto'  // Increased from h-16 to h-20 (80px when scrolled)
-                  : 'h-28 w-auto'  // Increased from h-20 to h-28 (112px when not scrolled)
+                  ? 'h-16 w-auto max-w-none'  // 64px when scrolled
+                  : 'h-24 w-auto max-w-none sm:h-28 lg:h-32'  // Responsive: 96px mobile, 112px tablet, 128px desktop
               }`}
               style={{ 
                 background: 'transparent',
-                mixBlendMode: 'multiply'
+                mixBlendMode: 'multiply',
+                minHeight: isScrolled ? '64px' : '96px'
               }}
             />
           </div>
 
           {/* Desktop Navigation Links */}
           <div className="hidden lg:flex items-center space-x-1">
-            {currentLinks.map((link, index) => (
+            {currentLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => handleLinkClick(link.id)}
