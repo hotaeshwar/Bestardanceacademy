@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import beestarImage from '../assets/images/428629782_122148540770072652_8701818441761608521_n.jpg';
+import videoFile from '../assets/images/BeStar.png';
 
 const AboutUs = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -55,17 +55,14 @@ const AboutUs = () => {
     // Add scroll listener
     window.addEventListener('scroll', handleScroll);
     
-    // Don't call handleScroll immediately - let user scroll to trigger
-    
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isVisible]);
+  
   return (
-    <section className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-gradient-to-br from-purple-50 to-pink-50">
+    <section id="about" className="py-8 sm:py-12 md:py-16 lg:py-20 xl:py-24 bg-gradient-to-br from-purple-50 to-pink-50">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
-        {/* Section Header */}
-        <div className={`text-center mb-8 sm:mb-12 md:mb-14 lg:mb-16 transition-all duration-1000 transform ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+        {/* Section Header - Always visible */}
+        <div className="text-center mb-8 sm:mb-12 md:mb-14 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-3 sm:mb-4 md:mb-6">
             About <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">BeStar</span>
           </h2>
@@ -74,15 +71,13 @@ const AboutUs = () => {
 
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 xl:gap-16 items-center">
-          {/* Image Section */}
-          <div className={`order-2 lg:order-1 transition-all duration-1000 transform delay-300 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'
-          }`}>
+          {/* Image Section - Always visible */}
+          <div className="order-2 lg:order-1">
             <div className="relative group max-w-xs sm:max-w-sm md:max-w-md mx-auto lg:max-w-lg xl:max-w-xl">
               <div className="absolute -inset-2 sm:-inset-3 md:-inset-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl sm:rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-1000"></div>
               <div className="relative bg-white p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl md:shadow-2xl">
                 <img
-                  src={beestarImage}
+                  src={videoFile}
                   alt="BeeStar Entertainment - Shail and Deepa Parki"
                   className="w-full h-48 sm:h-56 md:h-64 lg:h-72 xl:h-80 rounded-lg sm:rounded-xl object-cover shadow-md sm:shadow-lg transform transition-transform duration-700 hover:scale-105"
                 />
@@ -91,13 +86,9 @@ const AboutUs = () => {
           </div>
 
           {/* Content Section */}
-          <div className={`order-1 lg:order-2 space-y-4 sm:space-y-6 md:space-y-8 transition-all duration-1000 transform delay-500 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'
-          }`}>
-            {/* Our Journey */}
-            <div className={`space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-700 delay-600 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}>
+          <div className="order-1 lg:order-2 space-y-4 sm:space-y-6 md:space-y-8">
+            {/* Our Journey - Always visible */}
+            <div className="space-y-3 sm:space-y-4 md:space-y-6">
               <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900">
                 Our <span className="text-purple-600">Journey</span>
               </h3>
@@ -111,8 +102,8 @@ const AboutUs = () => {
               </p>
             </div>
 
-            {/* Our Mission */}
-            <div className={`space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-700 delay-800 ${
+            {/* Our Mission - Scroll triggered */}
+            <div className={`space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-700 delay-300 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}>
               <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900">
@@ -124,8 +115,8 @@ const AboutUs = () => {
               </p>
             </div>
 
-            {/* Core Values */}
-            <div className={`space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-700 delay-1000 ${
+            {/* Core Values - Scroll triggered */}
+            <div className={`space-y-3 sm:space-y-4 md:space-y-6 transition-all duration-700 delay-500 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}>
               <h3 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900">
@@ -155,8 +146,8 @@ const AboutUs = () => {
               </div>
             </div>
 
-            {/* Call to Action */}
-            <div className={`pt-4 sm:pt-6 md:pt-8 transition-all duration-700 delay-1200 ${
+            {/* Call to Action - Scroll triggered */}
+            <div className={`pt-4 sm:pt-6 md:pt-8 transition-all duration-700 delay-700 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}>
               <div className="bg-gradient-to-r from-purple-600 to-pink-600 p-4 sm:p-5 md:p-6 rounded-lg sm:rounded-xl text-white">
@@ -172,34 +163,34 @@ const AboutUs = () => {
           </div>
         </div>
 
-        {/* Stats Section */}
+        {/* Stats Section - Scroll triggered */}
         <div className={`mt-12 sm:mt-16 md:mt-18 lg:mt-20 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 transition-all duration-1000 transform delay-1000 ${
           isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
         }`}>
           <div className="text-center transform transition-all duration-300 hover:scale-110">
             <div className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-1 sm:mb-2">
-              {animatedStats.years}+
+              {isVisible ? animatedStats.years : '10'}+
             </div>
             <div className="text-gray-600 font-medium text-xs sm:text-sm md:text-base">Years of <span className="text-purple-600">Excellence</span></div>
           </div>
           
           <div className="text-center transform transition-all duration-300 hover:scale-110">
             <div className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-1 sm:mb-2">
-              {animatedStats.students}+
+              {isVisible ? animatedStats.students : '500'}+
             </div>
             <div className="text-gray-600 font-medium text-xs sm:text-sm md:text-base">Happy <span className="text-pink-600">Students</span></div>
           </div>
           
           <div className="text-center transform transition-all duration-300 hover:scale-110">
             <div className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-1 sm:mb-2">
-              {animatedStats.performances}+
+              {isVisible ? animatedStats.performances : '50'}+
             </div>
             <div className="text-gray-600 font-medium text-xs sm:text-sm md:text-base">Award Winning <span className="text-purple-600">Performances</span></div>
           </div>
           
           <div className="text-center transform transition-all duration-300 hover:scale-110">
             <div className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-1 sm:mb-2">
-              {animatedStats.domains}
+              {isVisible ? animatedStats.domains : '2'}
             </div>
             <div className="text-gray-600 font-medium text-xs sm:text-sm md:text-base">Specialized <span className="text-pink-600">Domains</span></div>
           </div>

@@ -13,15 +13,23 @@ function App() {
   const [activeTab, setActiveTab] = useState('dance');
 
   useEffect(() => {
+    // Apply Tailwind classes to body and html for full width
+    document.body.className = 'm-0 p-0 overflow-x-hidden w-full box-border';
+    document.documentElement.className = 'm-0 p-0 overflow-x-hidden w-full box-border';
+    
+    // Apply to root element
+    const root = document.getElementById('root');
+    if (root) {
+      root.className = 'm-0 p-0 w-full box-border';
+    }
+
     // Function to handle smooth scrolling to top of sections
     const handleHashChange = () => {
       const hash = window.location.hash;
       if (hash) {
         const element = document.querySelector(hash);
         if (element) {
-          // Get the navbar height for offset (adjust this value based on your navbar height)
-          const navbarHeight = 80; // Adjust this value to match your navbar height
-          
+          const navbarHeight = 80;
           const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
           const offsetPosition = elementPosition - navbarHeight;
 
@@ -33,32 +41,25 @@ function App() {
       }
     };
 
-    // Handle initial load with hash
     if (window.location.hash) {
-      // Small delay to ensure DOM is fully loaded
       setTimeout(handleHashChange, 100);
     }
 
-    // Listen for hash changes (when clicking nav links)
     window.addEventListener('hashchange', handleHashChange);
 
-    // Cleanup event listener
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
 
-  // Function to handle dance class link click
   const handleDanceClassClick = (e) => {
     e.preventDefault();
-    console.log('Dance class clicked'); // Debug log
     setActiveTab('dance');
     
-    // Small delay to ensure state update, then scroll
     setTimeout(() => {
       const element = document.getElementById('classes');
       if (element) {
-        const navbarHeight = 96; // Match your navbar height
+        const navbarHeight = 96;
         const elementPosition = element.offsetTop - navbarHeight;
         window.scrollTo({
           top: elementPosition,
@@ -68,17 +69,14 @@ function App() {
     }, 100);
   };
 
-  // Function to handle fashion class link click
   const handleFashionClassClick = (e) => {
     e.preventDefault();
-    console.log('Fashion class clicked'); // Debug log
     setActiveTab('fashion');
     
-    // Small delay to ensure state update, then scroll
     setTimeout(() => {
       const element = document.getElementById('classes');
       if (element) {
-        const navbarHeight = 96; // Match your navbar height
+        const navbarHeight = 96;
         const elementPosition = element.offsetTop - navbarHeight;
         window.scrollTo({
           top: elementPosition,
@@ -89,33 +87,33 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <>
       <RegistrationModal />
-      
       <SwitchTabNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
       
-      {/* Make sure each section has the corresponding id */}
-      <section id="home">
+      <section id="home" className="m-0 p-0">
         <VideoHero />
       </section>
       
-      <section id="about">
-        <AboutUs />
-      </section>
-      
-      <section id="classes">
-        {activeTab === 'dance' ? <DanceClass /> : <FashionShowClass />}
-      </section>
-      
-      <section id="contact">
-        <ContactUs />
-      </section>
-      
-      <Footer 
-        onDanceClassClick={handleDanceClassClick}
-        onFashionClassClick={handleFashionClassClick}
-      />
-    </div>
+      <div className="App">
+        <section id="about">
+          <AboutUs />
+        </section>
+        
+        <section id="classes">
+          {activeTab === 'dance' ? <DanceClass /> : <FashionShowClass />}
+        </section>
+        
+        <section id="contact">
+          <ContactUs />
+        </section>
+        
+        <Footer 
+          onDanceClassClick={handleDanceClassClick}
+          onFashionClassClick={handleFashionClassClick}
+        />
+      </div>
+    </>
   );
 }
 
