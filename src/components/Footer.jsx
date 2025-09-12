@@ -1,5 +1,5 @@
 import React from 'react';
-import beestarImage from '../assets/images/428629782_122148540770072652_8701818441761608521_n.jpg';
+import videoFile from '../assets/images/BeStar.png';
 
 const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
   return (
@@ -18,7 +18,7 @@ const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
             <div className="flex items-center mb-4">
               <div className="relative">
                 <img
-                  src={beestarImage}
+                  src={videoFile}
                   alt="BeeStar Entertainment"
                   className="h-16 w-auto object-contain bg-white/5 backdrop-blur-sm rounded-xl p-2 border border-white/10"
                 />
@@ -96,7 +96,7 @@ const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
                 <a href="#contact" className="text-slate-300 hover:text-white transition-all duration-300 text-sm font-medium hover:translate-x-1 inline-block relative group">
                   <span className="absolute left-0 top-1/2 w-0 h-0.5 bg-gradient-to-r from-purple-400 to-pink-400 group-hover:w-4 transition-all duration-300 -translate-y-1/2"></span>
                   <span className="group-hover:ml-6 transition-all duration-300">Contact</span>
-                </a>
+                </button>
               </li>
             </ul>
           </div>
