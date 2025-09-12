@@ -14,7 +14,8 @@ const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
                 <img
                   src={videoFile}
                   alt="BeStar Entertainment"
-                  className="h-16 w-auto object-contain bg-white rounded-xl p-2"
+                  className="h-16 w-auto object-contain bg-white rounded-xl p-3 border border-gray-200"
+                  style={{ backgroundColor: 'white' }}
                 />
               </div>
               <div className="ml-4">
