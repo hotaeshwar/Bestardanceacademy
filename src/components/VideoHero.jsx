@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import videoFile from '../assets/images/BeStar.png';
+import videoFile from '../assets/images/hero-video.mp4';
 
 const VideoHero = () => {
   const videoRef = useRef(null);
