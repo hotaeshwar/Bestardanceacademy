@@ -18,7 +18,7 @@ const SwitchTabNavbar = ({ activeTab, setActiveTab }) => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navbarHeight = 96;
+      const navbarHeight = 64;
       const elementPosition = element.offsetTop - navbarHeight;
       
       window.scrollTo({
@@ -61,17 +61,17 @@ const SwitchTabNavbar = ({ activeTab, setActiveTab }) => {
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between h-16">
           
-          {/* Logo Section */}
+          {/* Logo Section - Large Logo, Compact Navbar */}
           <div className="flex-shrink-0 flex items-center">
             <img
               src={videoFile}
               alt="Be Star Entertainment"
               className={`object-contain transition-all duration-300 ${
                 isScrolled 
-                  ? 'h-16 w-auto' 
-                  : 'h-20 w-auto'
+                  ? 'h-12 w-auto' 
+                  : 'h-14 w-auto'
               }`}
               style={{ 
                 background: 'transparent',
