@@ -1,10 +1,10 @@
 import React from 'react';
-import beestarImage from '../assets/images/428629782_122148540770072652_8701818441761608521_n.jpg';
+import videoFile from '../assets/images/BeStar.png';
 
 const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
   return (
     <footer className="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white relative overflow-hidden">
-      {/* Reduced animated background elements */}
+      {/* Subtle animated background elements */}
       <div className="absolute inset-0 opacity-3">
         <div className="absolute top-10 left-10 w-48 h-48 bg-purple-500 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-10 right-10 w-64 h-64 bg-pink-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
@@ -13,14 +13,14 @@ const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           
-          {/* Logo and About Section - Fixed Logo Visibility */}
+          {/* Logo and About Section */}
           <div className="lg:col-span-2">
             <div className="flex items-center mb-4">
               <div className="relative">
                 <img
-                  src={beestarImage}
-                  alt="BeeStar Entertainment"
-                  className="h-16 w-16 object-cover rounded-xl border-2 border-white/20 bg-white/10 backdrop-blur-sm"
+                  src={videoFile}
+                  alt="BeStar Entertainment"
+                  className="h-16 w-auto object-contain bg-white/10 backdrop-blur-sm rounded-xl p-2 border-2 border-white/20"
                 />
               </div>
               <div className="ml-4">
