@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
-import danceImage from '../assets/images/428629782_122148540770072652_8701818441761608521_n.jpg';
+import videoFile from '../assets/images/BeStar.png';
 
 const RegistrationModal = () => {
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
@@ -170,7 +170,7 @@ const RegistrationModal = () => {
                 {/* YOUR DANCE IMAGE - FINALLY! */}
                 <div className="mb-3">
                   <img 
-                    src={danceImage} 
+                    src={videoFile} 
                     alt="The Star Dance Championship" 
                     className="w-16 h-16 object-cover rounded-full mx-auto shadow-lg border-4 border-purple-200"
                   />
