@@ -26,7 +26,7 @@ const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
               </div>
               <div className="ml-4">
                 <h3 className="text-xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-purple-300 bg-clip-text text-transparent">
-                  BeeStar Entertainment
+                  BeStar Entertainment
                 </h3>
                 <p className="text-slate-400 text-xs font-medium tracking-wide">SINCE 2013</p>
               </div>
