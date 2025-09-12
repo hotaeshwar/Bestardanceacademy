@@ -15,11 +15,10 @@ const SwitchTabNavbar = ({ activeTab, setActiveTab }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Smooth scroll function
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const navbarHeight = 120; // Increased navbar height
+      const navbarHeight = 96;
       const elementPosition = element.offsetTop - navbarHeight;
       
       window.scrollTo({
@@ -29,13 +28,11 @@ const SwitchTabNavbar = ({ activeTab, setActiveTab }) => {
     }
   };
 
-  // Handle link click
   const handleLinkClick = (linkId) => {
     setActiveLink(linkId);
     scrollToSection(linkId);
   };
 
-  // Handle tab switch
   const handleTabSwitch = () => {
     setActiveTab(activeTab === 'dance' ? 'fashion' : 'dance');
     setActiveLink('home');
@@ -64,17 +61,17 @@ const SwitchTabNavbar = ({ activeTab, setActiveTab }) => {
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-32">
+        <div className="flex items-center justify-between h-24">
           
-          {/* Logo Section - Made Much Larger */}
+          {/* Logo Section */}
           <div className="flex-shrink-0 flex items-center">
             <img
               src={videoFile}
               alt="Be Star Entertainment"
               className={`object-contain transition-all duration-300 ${
                 isScrolled 
-                  ? 'h-20 w-auto' // Smaller when scrolled
-                  : 'h-28 w-auto'  // Much larger when at top
+                  ? 'h-16 w-auto' 
+                  : 'h-20 w-auto'
               }`}
               style={{ 
                 background: 'transparent',
