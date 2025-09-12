@@ -1,28 +1,27 @@
 import React from 'react';
-import videoFile from '../assets/images/BeStar.png';
+import beestarImage from '../assets/images/428629782_122148540770072652_8701818441761608521_n.jpg';
 
 const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
   return (
     <footer className="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 text-white relative overflow-hidden">
-      {/* Subtle animated background elements */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-10 left-10 w-72 h-72 bg-purple-500 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-10 right-10 w-96 h-96 bg-pink-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      {/* Reduced animated background elements */}
+      <div className="absolute inset-0 opacity-3">
+        <div className="absolute top-10 left-10 w-48 h-48 bg-purple-500 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 right-10 w-64 h-64 bg-pink-500 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-10 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           
-          {/* Logo and About Section */}
+          {/* Logo and About Section - Fixed Logo Visibility */}
           <div className="lg:col-span-2">
             <div className="flex items-center mb-4">
               <div className="relative">
                 <img
-                  src={videoFile}
+                  src={beestarImage}
                   alt="BeeStar Entertainment"
-                  className="h-16 w-auto object-contain bg-white/5 backdrop-blur-sm rounded-xl p-2 border border-white/10"
+                  className="h-16 w-16 object-cover rounded-xl border-2 border-white/20 bg-white/10 backdrop-blur-sm"
                 />
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl blur opacity-20"></div>
               </div>
               <div className="ml-4">
                 <h3 className="text-xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-purple-300 bg-clip-text text-transparent">
