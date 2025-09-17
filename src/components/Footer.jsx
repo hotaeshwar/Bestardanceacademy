@@ -20,9 +20,8 @@ const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
                 <img
                   src={beestarImage}
                   alt="BeeStar Entertainment"
-                  className="h-16 w-auto object-contain bg-white/5 backdrop-blur-sm rounded-xl p-2 border border-white/10"
+                  className="h-16 w-auto object-contain bg-white rounded-xl p-2 border border-white/10"
                 />
-                <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl blur opacity-20"></div>
               </div>
               <div className="ml-4">
                 <h3 className="text-xl font-black bg-gradient-to-r from-purple-400 via-pink-400 to-purple-300 bg-clip-text text-transparent">
