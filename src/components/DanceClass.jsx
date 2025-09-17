@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Music, Heart, Star, Users, Facebook, Instagram, Zap, Sparkles, Crown, Award, Home, Building2, UserCheck, GraduationCap, Music2, Radio, Wind, Play, RotateCw, Flame, Trophy, Phone } from 'lucide-react';
+import { X, Music, Heart, Star, Users, Facebook, Instagram, Zap, Sparkles, Crown, Award, Building2, UserCheck, GraduationCap, Music2, Radio, Wind, Play, RotateCw, Flame, Trophy, Phone } from 'lucide-react';
 
 // Import images
 import hiphopImage from '../assets/images/hiphop.jpg';
@@ -103,13 +103,6 @@ const DanceClass = () => {
       icon: <UserCheck className="w-6 h-6" />,
       image: personalDanceImage,
       description: "One-on-one personalized dance training sessions"
-    },
-    {
-      id: 12,
-      name: "Home Tuitions",
-      icon: <Home className="w-6 h-6" />,
-      image: personalDanceImage,
-      description: "Convenient dance lessons at your home"
     }
   ];
 
