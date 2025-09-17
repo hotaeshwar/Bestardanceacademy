@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { X, Music, Heart, Star, Users, Facebook, Instagram, Zap, Sparkles, Crown, Award, Home, Building2, UserCheck, GraduationCap, Music2, Radio, Wind, Play, RotateCw, Flame, Trophy, Phone } from 'lucide-react';
 
+// Import images
+import hiphopImage from '../assets/images/hiphop.jpg';
+import bhangraImage from '../assets/images/bhangra.jpg';
+import classicalImage from '../assets/images/classical.jpg';
+import corporateImage from '../assets/images/corporate.jpg';
+import personalDanceImage from '../assets/images/personaldance.jpg';
+import poppingImage from '../assets/images/popping dance.jpg';
+import schoolFunctionImage from '../assets/images/schoolfunction.jpg';
+import semiclassicalImage from '../assets/images/semiclassical.jpg';
+import weddingImage from '../assets/images/wedding.jpg';
+import zumbaImage from '../assets/images/zumba.jpg';
+
 const DanceClass = () => {
   const [selectedClass, setSelectedClass] = useState(null);
   const [showContactModal, setShowContactModal] = useState(false);
@@ -19,72 +31,84 @@ const DanceClass = () => {
       id: 1,
       name: "Hip Hop",
       icon: <Radio className="w-6 h-6" />,
+      image: hiphopImage,
       description: "Urban street dance with strong beats and energetic movements"
     },
     {
       id: 2,
       name: "Freestyle",
       icon: <Wind className="w-6 h-6" />,
+      image: zumbaImage,
       description: "Express yourself freely with improvised dance movements"
     },
     {
       id: 3,
       name: "Bhangra",
       icon: <Crown className="w-6 h-6" />,
+      image: bhangraImage,
       description: "Traditional Punjabi folk dance full of joy and energy"
     },
     {
       id: 4,
       name: "Popping",
       icon: <RotateCw className="w-6 h-6" />,
+      image: poppingImage,
       description: "Street dance with quick muscle contractions and robotic movements"
     },
     {
       id: 5,
       name: "Classical",
       icon: <Award className="w-6 h-6" />,
+      image: classicalImage,
       description: "Traditional Indian classical dance forms with grace and precision"
     },
     {
       id: 6,
       name: "Semi-Classical",
       icon: <Music2 className="w-6 h-6" />,
+      image: semiclassicalImage,
       description: "Fusion of classical and contemporary dance styles"
     },
     {
       id: 7,
       name: "Bollywood",
       icon: <Sparkles className="w-6 h-6" />,
+      image: hiphopImage,
       description: "Vibrant Indian cinema-inspired dance with storytelling"
     },
     {
       id: 8,
       name: "School Functions",
       icon: <GraduationCap className="w-6 h-6" />,
+      image: schoolFunctionImage,
       description: "Choreography for annual days, competitions, and school events"
     },
     {
       id: 9,
       name: "Wedding Choreography",
       icon: <Heart className="w-6 h-6" />,
+      image: weddingImage,
       description: "Special choreography for your memorable wedding moments"
     },
     {
       id: 10,
       name: "Corporate Events",
       icon: <Building2 className="w-6 h-6" />,
+      image: corporateImage,
       description: "Professional choreography for corporate functions and team events"
     },
     {
       id: 11,
       name: "Personal Classes",
       icon: <UserCheck className="w-6 h-6" />,
+      image: personalDanceImage,
       description: "One-on-one personalized dance training sessions"
     },
     {
       id: 12,
       name: "Home Tuitions",
       icon: <Home className="w-6 h-6" />,
+      image: personalDanceImage,
       description: "Convenient dance lessons at your home"
     }
   ];
@@ -231,14 +255,14 @@ const DanceClass = () => {
               className="group bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105 border border-gray-100"
               onClick={() => openClassDetails(danceClass)}
             >
-              {/* Icon Display */}
-              <div className="relative overflow-hidden aspect-[4/3] bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
-                <div className="transform group-hover:scale-110 transition-transform duration-300">
-                  <div className="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white shadow-lg">
-                    {danceClass.icon}
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-300" />
+              {/* Image Display */}
+              <div className="relative overflow-hidden aspect-[4/3] rounded-t-xl">
+                <img 
+                  src={danceClass.image} 
+                  alt={danceClass.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300" />
               </div>
 
               {/* Card Content */}
