@@ -1,5 +1,5 @@
 import React from 'react';
-import beestarImage from '../assets/images/428629782_122148540770072652_8701818441761608521_n.jpg';
+import beestarImage from '../assets/images/BeStar.png';
 
 const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
   return (
