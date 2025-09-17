@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import danceImage from '../assets/images/428629782_122148540770072652_8701818441761608521_n.jpg';
+import danceImage from '../assets/images/BeStar.png';
 
 const SwitchTabNavbar = ({ activeTab, setActiveTab }) => {
   const [activeLink, setActiveLink] = useState('home');
