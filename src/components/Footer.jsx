@@ -170,6 +170,9 @@ const Footer = ({ onDanceClassClick, onFashionClassClick }) => {
               <p className="text-slate-500 text-xs mt-1">
                 Founded in 2013 by Shail and Deepa Parki
               </p>
+              <p className="text-slate-500 text-xs mt-1">
+                <span>Website crafted by</span> <span className="font-medium bg-gradient-to-r from-orange-400 to-blue-500 bg-clip-text text-transparent">BuildingindiaDigital</span> - Bringing digital excellence to life
+              </p>
             </div>
             
             <div className="flex space-x-6 text-xs">
