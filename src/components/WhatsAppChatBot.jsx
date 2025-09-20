@@ -56,7 +56,7 @@ const WhatsAppChatBot = () => {
         
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="relative group bg-gradient-to-br from-purple-600 via-blue-600 to-cyan-500 hover:from-purple-700 hover:via-blue-700 hover:to-cyan-600 rounded-full shadow-2xl 
+          className="relative group bg-[#25D366] hover:bg-[#20BA5A] rounded-full shadow-2xl 
                      w-14 h-14 sm:w-16 sm:h-16 lg:w-18 lg:h-18 
                      flex items-center justify-center transform hover:scale-110 
                      transition-all duration-300 animate-pulse-ai"
@@ -114,7 +114,7 @@ const WhatsAppChatBot = () => {
               <div className="relative">
                 <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
                   <svg
-                    className="w-7 h-7 text-purple-600"
+                    className="w-7 h-7 text-[#25D366]"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -227,16 +227,16 @@ const WhatsAppChatBot = () => {
         
         @keyframes pulseAI {
           0% {
-            box-shadow: 0 0 0 0 rgba(147, 51, 234, 0.7);
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
           }
           50% {
-            box-shadow: 0 0 0 10px rgba(59, 130, 246, 0.5);
+            box-shadow: 0 0 0 10px rgba(37, 211, 102, 0.5);
           }
           70% {
-            box-shadow: 0 0 0 15px rgba(6, 182, 212, 0);
+            box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
           }
           100% {
-            box-shadow: 0 0 0 0 rgba(147, 51, 234, 0);
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
           }
         }
         
