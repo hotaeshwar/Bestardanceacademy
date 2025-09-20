@@ -50,13 +50,13 @@ const WhatsAppChatBot = () => {
   useEffect(() => {
     if (isOpen && chatHistory.length === 0) {
       simulateTyping(() => {
-        addMessage("Hello! Welcome to BeeStar Entertainment! 🌟 I'm your AI assistant here to help you explore our amazing dance and fashion programs.", true);
+        addMessage("Hello! Welcome to BeeStar Entertainment! I'm your AI assistant here to help you explore our amazing dance and fashion programs.", true);
         setTimeout(() => {
           addMessage("What brings you here today?", true, [
-            { id: 'dance', text: '💃 Dance Classes', action: () => handleUserChoice('service', 'dance') },
-            { id: 'fashion', text: '👗 Fashion Shows', action: () => handleUserChoice('service', 'fashion') },
-            { id: 'both', text: '🎭 Both Services', action: () => handleUserChoice('service', 'both') },
-            { id: 'info', text: '📋 General Info', action: () => handleUserChoice('service', 'info') }
+            { id: 'dance', text: 'Dance Classes', action: () => handleUserChoice('service', 'dance') },
+            { id: 'fashion', text: 'Fashion Shows', action: () => handleUserChoice('service', 'fashion') },
+            { id: 'both', text: 'Both Services', action: () => handleUserChoice('service', 'both') },
+            { id: 'info', text: 'General Info', action: () => handleUserChoice('service', 'info') }
           ]);
         }, 1500);
       }, 500);
@@ -93,35 +93,40 @@ const WhatsAppChatBot = () => {
   const getChoiceText = (key, value) => {
     const choices = {
       service: {
-        dance: '💃 Dance Classes',
-        fashion: '👗 Fashion Shows',
-        both: '🎭 Both Services',
-        info: '📋 General Info'
+        dance: 'Dance Classes',
+        fashion: 'Fashion Shows',
+        both: 'Both Services',
+        info: 'General Info'
       },
       danceType: {
-        hiphop: '🎤 Hip Hop',
-        bhangra: '🎉 Bhangra',
-        classical: '🕺 Classical',
-        bollywood: '🎬 Bollywood',
-        freestyle: '🌪️ Freestyle',
-        wedding: '💒 Wedding Choreography',
-        personal: '👤 Personal Classes'
+        hiphop: 'Hip Hop',
+        bhangra: 'Bhangra',
+        classical: 'Classical',
+        bollywood: 'Bollywood',
+        freestyle: 'Freestyle',
+        popping: 'Popping',
+        semiclassical: 'Semi-Classical',
+        wedding: 'Wedding Choreography',
+        corporate: 'Corporate Events',
+        personal: 'Personal Classes',
+        home: 'Home Tuitions',
+        school: 'School Functions'
       },
       fashionType: {
-        kids: '👶 Kids Fashion Show',
-        summer: '☀️ Summer Camp',
-        winter: '❄️ Winter Camp',
-        government: '🏛️ Government Events'
+        kids: 'Kids Fashion Show',
+        summer: 'Summer Camp',
+        winter: 'Winter Camp',
+        government: 'Government Events'
       },
       experience: {
-        beginner: '🌱 Complete Beginner',
-        intermediate: '📈 Some Experience',
-        advanced: '⭐ Advanced Level'
+        beginner: 'Complete Beginner',
+        intermediate: 'Some Experience',
+        advanced: 'Advanced Level'
       },
       ageGroup: {
-        kids: '👶 Kids (5-12 years)',
-        teens: '🧑‍🎓 Teens (13-17 years)',
-        adults: '👨‍💼 Adults (18+ years)'
+        kids: 'Kids (5-12 years)',
+        teens: 'Teens (13-17 years)',
+        adults: 'Adults (18+ years)'
       }
     };
     return choices[key]?.[value] || value;
@@ -129,75 +134,68 @@ const WhatsAppChatBot = () => {
 
   const showDanceOptions = () => {
     simulateTyping(() => {
-      addMessage("Wonderful choice! Our dance classes are absolutely amazing! 🕺💃", true);
-      setTimeout(() => {
-        addMessage("Which style catches your interest?", true, [
-          { id: 'hiphop', text: '🎤 Hip Hop', action: () => handleUserChoice('danceType', 'hiphop') },
-          { id: 'bhangra', text: '🎉 Bhangra', action: () => handleUserChoice('danceType', 'bhangra') },
-          { id: 'classical', text: '🕺 Classical', action: () => handleUserChoice('danceType', 'classical') },
-          { id: 'bollywood', text: '🎬 Bollywood', action: () => handleUserChoice('danceType', 'bollywood') },
-          { id: 'freestyle', text: '🌪️ Freestyle', action: () => handleUserChoice('danceType', 'freestyle') },
-          { id: 'wedding', text: '💒 Wedding Choreography', action: () => handleUserChoice('danceType', 'wedding') },
-          { id: 'personal', text: '👤 Personal Classes', action: () => handleUserChoice('danceType', 'personal') }
-        ]);
-      }, 1000);
+      addMessage("Our dance classes are absolutely amazing! Which style catches your interest?", true, [
+        { id: 'hiphop', text: 'Hip Hop', action: () => handleUserChoice('danceType', 'hiphop') },
+        { id: 'bhangra', text: 'Bhangra', action: () => handleUserChoice('danceType', 'bhangra') },
+        { id: 'classical', text: 'Classical', action: () => handleUserChoice('danceType', 'classical') },
+        { id: 'bollywood', text: 'Bollywood', action: () => handleUserChoice('danceType', 'bollywood') },
+        { id: 'freestyle', text: 'Freestyle', action: () => handleUserChoice('danceType', 'freestyle') },
+        { id: 'popping', text: 'Popping', action: () => handleUserChoice('danceType', 'popping') },
+        { id: 'semiclassical', text: 'Semi-Classical', action: () => handleUserChoice('danceType', 'semiclassical') },
+        { id: 'wedding', text: 'Wedding Choreography', action: () => handleUserChoice('danceType', 'wedding') },
+        { id: 'corporate', text: 'Corporate Events', action: () => handleUserChoice('danceType', 'corporate') },
+        { id: 'personal', text: 'Personal Classes', action: () => handleUserChoice('danceType', 'personal') },
+        { id: 'home', text: 'Home Tuitions', action: () => handleUserChoice('danceType', 'home') },
+        { id: 'school', text: 'School Functions', action: () => handleUserChoice('danceType', 'school') }
+      ]);
     });
   };
 
   const showFashionOptions = () => {
     simulateTyping(() => {
-      addMessage("Fashion shows are our specialty! ✨ We create magical runway experiences!", true);
-      setTimeout(() => {
-        addMessage("Which program interests you most?", true, [
-          { id: 'kids', text: '👶 Kids Fashion Show', action: () => handleUserChoice('fashionType', 'kids') },
-          { id: 'summer', text: '☀️ Summer Camp', action: () => handleUserChoice('fashionType', 'summer') },
-          { id: 'winter', text: '❄️ Winter Camp', action: () => handleUserChoice('fashionType', 'winter') },
-          { id: 'government', text: '🏛️ Government Events', action: () => handleUserChoice('fashionType', 'government') }
-        ]);
-      }, 1000);
+      addMessage("Fashion shows are our specialty! Which program interests you most?", true, [
+        { id: 'kids', text: 'Kids Fashion Show', action: () => handleUserChoice('fashionType', 'kids') },
+        { id: 'summer', text: 'Summer Camp', action: () => handleUserChoice('fashionType', 'summer') },
+        { id: 'winter', text: 'Winter Camp', action: () => handleUserChoice('fashionType', 'winter') },
+        { id: 'government', text: 'Government Events', action: () => handleUserChoice('fashionType', 'government') }
+      ]);
     });
   };
 
   const showBothServicesInfo = () => {
     simulateTyping(() => {
-      addMessage("Perfect! We offer comprehensive training in both dance and fashion! 🎭✨", true);
+      addMessage("We offer comprehensive training in both dance and fashion! Our combined programs give you the complete entertainment experience.", true);
       setTimeout(() => {
-        addMessage("Our combined programs give you the complete entertainment experience. You can learn multiple dance styles AND participate in our fashion shows!", true);
-        setTimeout(() => {
-          askContactPreference();
-        }, 1500);
+        askContactPreference();
       }, 1000);
     });
   };
 
   const showGeneralInfo = () => {
     simulateTyping(() => {
-      addMessage("BeeStar Entertainment has been nurturing talent since 2013! 🌟", true);
+      addMessage("BeeStar Entertainment has been nurturing talent since 2013! Founded by Shail and Deepa Parki, we offer 12+ Dance Styles, Professional Fashion Shows, Competition Training. Located in Zirakpur, Mon-Sat: 6AM-9PM", true);
       setTimeout(() => {
-        addMessage("Founded by Shail and Deepa Parki, we offer:\n\n🕺 12+ Dance Styles\n👗 Professional Fashion Shows\n🏆 Competition Training\n📍 Located in Zirakpur\n⏰ Mon-Sat: 6AM-9PM", true);
-        setTimeout(() => {
-          askContactPreference();
-        }, 2000);
-      }, 1000);
+        askContactPreference();
+      }, 1500);
     });
   };
 
   const askExperienceLevel = () => {
     simulateTyping(() => {
-      addMessage("Great choice! What's your current experience level?", true, [
-        { id: 'beginner', text: '🌱 Complete Beginner', action: () => handleUserChoice('experience', 'beginner') },
-        { id: 'intermediate', text: '📈 Some Experience', action: () => handleUserChoice('experience', 'intermediate') },
-        { id: 'advanced', text: '⭐ Advanced Level', action: () => handleUserChoice('experience', 'advanced') }
+      addMessage("What's your current experience level?", true, [
+        { id: 'beginner', text: 'Complete Beginner', action: () => handleUserChoice('experience', 'beginner') },
+        { id: 'intermediate', text: 'Some Experience', action: () => handleUserChoice('experience', 'intermediate') },
+        { id: 'advanced', text: 'Advanced Level', action: () => handleUserChoice('experience', 'advanced') }
       ]);
     });
   };
 
   const askAgeGroup = () => {
     simulateTyping(() => {
-      addMessage("Excellent choice! What age group are we planning for?", true, [
-        { id: 'kids', text: '👶 Kids (5-12 years)', action: () => handleUserChoice('ageGroup', 'kids') },
-        { id: 'teens', text: '🧑‍🎓 Teens (13-17 years)', action: () => handleUserChoice('ageGroup', 'teens') },
-        { id: 'adults', text: '👨‍💼 Adults (18+ years)', action: () => handleUserChoice('ageGroup', 'adults') }
+      addMessage("What age group are we planning for?", true, [
+        { id: 'kids', text: 'Kids (5-12 years)', action: () => handleUserChoice('ageGroup', 'kids') },
+        { id: 'teens', text: 'Teens (13-17 years)', action: () => handleUserChoice('ageGroup', 'teens') },
+        { id: 'adults', text: 'Adults (18+ years)', action: () => handleUserChoice('ageGroup', 'adults') }
       ]);
     });
   };
@@ -205,50 +203,50 @@ const WhatsAppChatBot = () => {
   const askContactPreference = () => {
     simulateTyping(() => {
       addMessage("Perfect! I'll prepare a personalized message for our team. How would you like to connect?", true, [
-        { id: 'whatsapp', text: '📱 WhatsApp (Instant)', action: () => generateWhatsAppMessage() },
-        { id: 'call', text: '📞 Schedule Call', action: () => generateCallRequest() },
-        { id: 'visit', text: '🏢 Visit Studio', action: () => generateVisitRequest() }
+        { id: 'whatsapp', text: 'WhatsApp (Instant)', action: () => generateWhatsAppMessage() },
+        { id: 'call', text: 'Schedule Call', action: () => generateCallRequest() },
+        { id: 'visit', text: 'Visit Studio', action: () => generateVisitRequest() }
       ]);
     }, 1500);
   };
 
   const generateWhatsAppMessage = () => {
-    addMessage('📱 WhatsApp (Instant)', false);
+    addMessage('WhatsApp (Instant)', false);
     
     simulateTyping(() => {
       const message = createPersonalizedMessage();
-      addMessage(`Perfect! I've created a personalized message for you. When you click the button below, it will open WhatsApp with this message ready to send:\n\n"${message}"`, true);
+      addMessage(`I've created a personalized message for you. When you click the button below, it will open WhatsApp with this message ready to send:\n\n"${message}"`, true);
       
       setTimeout(() => {
         addMessage("Ready to connect?", true, [
           { 
             id: 'send', 
-            text: '🚀 Send WhatsApp Message', 
+            text: 'Send WhatsApp Message', 
             action: () => {
               const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
               window.open(url, '_blank');
-              addMessage('✅ WhatsApp opened! Send the message to connect with our team.', true);
+              addMessage('WhatsApp opened! Send the message to connect with our team.', true);
             }
           },
-          { id: 'restart', text: '🔄 Start Over', action: () => restartChat() }
+          { id: 'restart', text: 'Start Over', action: () => restartChat() }
         ]);
       }, 1000);
     }, 2000);
   };
 
   const generateCallRequest = () => {
-    addMessage('📞 Schedule Call', false);
+    addMessage('Schedule Call', false);
     const message = createPersonalizedMessage() + "\n\nI would prefer to schedule a phone call to discuss this further. Please let me know your available times.";
     
     simulateTyping(() => {
       addMessage("I'll send a message requesting a phone call consultation.", true, [
         { 
           id: 'send', 
-          text: '📞 Request Call Back', 
+          text: 'Request Call Back', 
           action: () => {
             const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
-            addMessage('✅ Call request sent! Our team will contact you soon.', true);
+            addMessage('Call request sent! Our team will contact you soon.', true);
           }
         }
       ]);
@@ -256,18 +254,18 @@ const WhatsAppChatBot = () => {
   };
 
   const generateVisitRequest = () => {
-    addMessage('🏢 Visit Studio', false);
+    addMessage('Visit Studio', false);
     const message = createPersonalizedMessage() + "\n\nI would like to visit your studio to see the facilities and meet the team in person. Please let me know the best time to visit.";
     
     simulateTyping(() => {
       addMessage("I'll send a message requesting a studio visit.", true, [
         { 
           id: 'send', 
-          text: '🏢 Request Studio Visit', 
+          text: 'Request Studio Visit', 
           action: () => {
             const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
             window.open(url, '_blank');
-            addMessage('✅ Visit request sent! Our team will schedule your studio tour.', true);
+            addMessage('Visit request sent! Our team will schedule your studio tour.', true);
           }
         }
       ]);
@@ -277,31 +275,39 @@ const WhatsAppChatBot = () => {
   const createPersonalizedMessage = () => {
     const { service, danceType, fashionType, experience, ageGroup } = userResponses;
     
-    let message = "Hello BeeStar Entertainment! 🌟\n\n";
-    message += "I'm interested in your services and would like to know more about:\n\n";
+    let message = "Hello BeeStar Entertainment Team!\n\n";
+    message += "I'm interested in your services and contacted you through your AI assistant. Here are the details of my inquiry:\n\n";
 
+    // Add service details based on customer choices
     if (service === 'dance' && danceType) {
-      message += `🕺 Dance Classes - ${getChoiceText('danceType', danceType)}\n`;
+      message += `SERVICE REQUESTED: Dance Classes\n`;
+      message += `DANCE STYLE: ${getChoiceText('danceType', danceType)}\n`;
       if (experience) {
-        message += `📊 Experience Level: ${getChoiceText('experience', experience)}\n`;
+        message += `EXPERIENCE LEVEL: ${getChoiceText('experience', experience)}\n`;
       }
     } else if (service === 'fashion' && fashionType) {
-      message += `👗 Fashion Shows - ${getChoiceText('fashionType', fashionType)}\n`;
+      message += `SERVICE REQUESTED: Fashion Shows\n`;
+      message += `PROGRAM TYPE: ${getChoiceText('fashionType', fashionType)}\n`;
       if (ageGroup) {
-        message += `👥 Age Group: ${getChoiceText('ageGroup', ageGroup)}\n`;
+        message += `AGE GROUP: ${getChoiceText('ageGroup', ageGroup)}\n`;
       }
     } else if (service === 'both') {
-      message += "🎭 Both Dance Classes and Fashion Shows\n";
+      message += `SERVICE REQUESTED: Both Dance Classes and Fashion Shows\n`;
+      message += `INTEREST: Complete entertainment training program\n`;
     } else if (service === 'info') {
-      message += "📋 General Information about your programs\n";
+      message += `SERVICE REQUESTED: General Information\n`;
+      message += `INQUIRY TYPE: Learn about all your programs and services\n`;
     }
 
-    message += "\nPlease provide me with:\n";
+    message += "\nI would like information about:\n";
     message += "• Class schedules and timings\n";
-    message += "• Fee structure and packages\n";
+    message += "• Fee structure and available packages\n";
     message += "• Trial class availability\n";
-    message += "• Any current offers or discounts\n\n";
-    message += "Looking forward to joining BeeStar Entertainment family! 🎉";
+    message += "• Current offers or discounts\n";
+    message += "• Enrollment process\n\n";
+    
+    message += "Please provide me with detailed information about the above mentioned service. I'm looking forward to joining the BeeStar Entertainment family!\n\n";
+    message += "Thank you for your time and consideration.";
 
     return message;
   };
@@ -350,7 +356,7 @@ const WhatsAppChatBot = () => {
         <div className="absolute bottom-full right-0 mb-3 px-4 py-2 bg-gradient-to-r from-gray-900 to-gray-800 text-white 
                         text-sm rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 
                         transition-opacity duration-300 pointer-events-none">
-          🤖 AI Assistant Ready to Help
+          AI Assistant Ready to Help
           <div className="absolute top-full right-6 w-0 h-0 border-l-4 border-r-4 
                           border-t-4 border-transparent border-t-gray-900"></div>
         </div>
@@ -385,7 +391,7 @@ const WhatsAppChatBot = () => {
               
               <div className="flex-1">
                 <h3 className="font-semibold text-lg flex items-center">
-                  🤖 BeeStar AI Assistant
+                  BeeStar AI Assistant
                   <span className="ml-2 text-xs bg-white/20 px-2 py-1 rounded-full">SMART</span>
                 </h3>
                 <p className="text-purple-100 text-sm flex items-center">
