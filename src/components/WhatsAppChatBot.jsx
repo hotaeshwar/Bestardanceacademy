@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { X, Send, MessageCircle, Users, Clock, Headphones, Phone, Bot, Sparkles } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { X, Send, MessageCircle, Users, Clock, Headphones, Phone, Bot, Sparkles, Music, Heart, Star, Baby, Sun, Snowflake, Building } from 'lucide-react';
 
 const WhatsAppChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [customMessage, setCustomMessage] = useState('');
   const [isVisible, setIsVisible] = useState(false);
+  const [currentStep, setCurrentStep] = useState('welcome');
+  const [userResponses, setUserResponses] = useState({});
+  const [chatHistory, setChatHistory] = useState([]);
+  const [isTyping, setIsTyping] = useState(false);
+  const messagesEndRef = useRef(null);
 
   // Your WhatsApp number
   const whatsappNumber = '917696664161';
@@ -15,38 +19,298 @@ const WhatsAppChatBot = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const openWhatsApp = (message = '') => {
-    const text = message || customMessage;
-    if (text.trim()) {
-      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
-      window.open(url, '_blank');
-      setCustomMessage('');
-      setIsOpen(false);
-    }
+  // Auto scroll to bottom
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const serviceOptions = [
-    {
-      icon: <Users className="w-4 h-4" />,
-      text: 'Tell me about your services',
-      message: 'Hi, I want to know about your services and pricing'
-    },
-    {
-      icon: <MessageCircle className="w-4 h-4" />,
-      text: 'Get a quote',
-      message: 'Hi, please send me a detailed quote for your services'
-    },
-    {
-      icon: <Clock className="w-4 h-4" />,
-      text: 'Product information',
-      message: 'Hi, I need more information about your products'
-    },
-    {
-      icon: <Headphones className="w-4 h-4" />,
-      text: 'Customer support',
-      message: 'Hi, I need help with customer support'
+  useEffect(scrollToBottom, [chatHistory]);
+
+  // Add message to chat
+  const addMessage = (message, isBot = true, options = null) => {
+    setChatHistory(prev => [...prev, {
+      id: Date.now(),
+      message,
+      isBot,
+      options,
+      timestamp: new Date()
+    }]);
+  };
+
+  // Simulate typing delay
+  const simulateTyping = (callback, delay = 1000) => {
+    setIsTyping(true);
+    setTimeout(() => {
+      setIsTyping(false);
+      callback();
+    }, delay);
+  };
+
+  // Initialize chat
+  useEffect(() => {
+    if (isOpen && chatHistory.length === 0) {
+      simulateTyping(() => {
+        addMessage("Hello! Welcome to BeeStar Entertainment! 🌟 I'm your AI assistant here to help you explore our amazing dance and fashion programs.", true);
+        setTimeout(() => {
+          addMessage("What brings you here today?", true, [
+            { id: 'dance', text: '💃 Dance Classes', action: () => handleUserChoice('service', 'dance') },
+            { id: 'fashion', text: '👗 Fashion Shows', action: () => handleUserChoice('service', 'fashion') },
+            { id: 'both', text: '🎭 Both Services', action: () => handleUserChoice('service', 'both') },
+            { id: 'info', text: '📋 General Info', action: () => handleUserChoice('service', 'info') }
+          ]);
+        }, 1500);
+      }, 500);
     }
-  ];
+  }, [isOpen]);
+
+  // Handle user choices
+  const handleUserChoice = (key, value) => {
+    setUserResponses(prev => ({ ...prev, [key]: value }));
+    addMessage(getChoiceText(key, value), false);
+
+    // Navigate to next step based on choice
+    setTimeout(() => {
+      if (key === 'service') {
+        if (value === 'dance') {
+          showDanceOptions();
+        } else if (value === 'fashion') {
+          showFashionOptions();
+        } else if (value === 'both') {
+          showBothServicesInfo();
+        } else {
+          showGeneralInfo();
+        }
+      } else if (key === 'danceType') {
+        askExperienceLevel();
+      } else if (key === 'fashionType') {
+        askAgeGroup();
+      } else if (key === 'experience' || key === 'ageGroup') {
+        askContactPreference();
+      }
+    }, 500);
+  };
+
+  const getChoiceText = (key, value) => {
+    const choices = {
+      service: {
+        dance: '💃 Dance Classes',
+        fashion: '👗 Fashion Shows',
+        both: '🎭 Both Services',
+        info: '📋 General Info'
+      },
+      danceType: {
+        hiphop: '🎤 Hip Hop',
+        bhangra: '🎉 Bhangra',
+        classical: '🕺 Classical',
+        bollywood: '🎬 Bollywood',
+        freestyle: '🌪️ Freestyle',
+        wedding: '💒 Wedding Choreography',
+        personal: '👤 Personal Classes'
+      },
+      fashionType: {
+        kids: '👶 Kids Fashion Show',
+        summer: '☀️ Summer Camp',
+        winter: '❄️ Winter Camp',
+        government: '🏛️ Government Events'
+      },
+      experience: {
+        beginner: '🌱 Complete Beginner',
+        intermediate: '📈 Some Experience',
+        advanced: '⭐ Advanced Level'
+      },
+      ageGroup: {
+        kids: '👶 Kids (5-12 years)',
+        teens: '🧑‍🎓 Teens (13-17 years)',
+        adults: '👨‍💼 Adults (18+ years)'
+      }
+    };
+    return choices[key]?.[value] || value;
+  };
+
+  const showDanceOptions = () => {
+    simulateTyping(() => {
+      addMessage("Wonderful choice! Our dance classes are absolutely amazing! 🕺💃", true);
+      setTimeout(() => {
+        addMessage("Which style catches your interest?", true, [
+          { id: 'hiphop', text: '🎤 Hip Hop', action: () => handleUserChoice('danceType', 'hiphop') },
+          { id: 'bhangra', text: '🎉 Bhangra', action: () => handleUserChoice('danceType', 'bhangra') },
+          { id: 'classical', text: '🕺 Classical', action: () => handleUserChoice('danceType', 'classical') },
+          { id: 'bollywood', text: '🎬 Bollywood', action: () => handleUserChoice('danceType', 'bollywood') },
+          { id: 'freestyle', text: '🌪️ Freestyle', action: () => handleUserChoice('danceType', 'freestyle') },
+          { id: 'wedding', text: '💒 Wedding Choreography', action: () => handleUserChoice('danceType', 'wedding') },
+          { id: 'personal', text: '👤 Personal Classes', action: () => handleUserChoice('danceType', 'personal') }
+        ]);
+      }, 1000);
+    });
+  };
+
+  const showFashionOptions = () => {
+    simulateTyping(() => {
+      addMessage("Fashion shows are our specialty! ✨ We create magical runway experiences!", true);
+      setTimeout(() => {
+        addMessage("Which program interests you most?", true, [
+          { id: 'kids', text: '👶 Kids Fashion Show', action: () => handleUserChoice('fashionType', 'kids') },
+          { id: 'summer', text: '☀️ Summer Camp', action: () => handleUserChoice('fashionType', 'summer') },
+          { id: 'winter', text: '❄️ Winter Camp', action: () => handleUserChoice('fashionType', 'winter') },
+          { id: 'government', text: '🏛️ Government Events', action: () => handleUserChoice('fashionType', 'government') }
+        ]);
+      }, 1000);
+    });
+  };
+
+  const showBothServicesInfo = () => {
+    simulateTyping(() => {
+      addMessage("Perfect! We offer comprehensive training in both dance and fashion! 🎭✨", true);
+      setTimeout(() => {
+        addMessage("Our combined programs give you the complete entertainment experience. You can learn multiple dance styles AND participate in our fashion shows!", true);
+        setTimeout(() => {
+          askContactPreference();
+        }, 1500);
+      }, 1000);
+    });
+  };
+
+  const showGeneralInfo = () => {
+    simulateTyping(() => {
+      addMessage("BeeStar Entertainment has been nurturing talent since 2013! 🌟", true);
+      setTimeout(() => {
+        addMessage("Founded by Shail and Deepa Parki, we offer:\n\n🕺 12+ Dance Styles\n👗 Professional Fashion Shows\n🏆 Competition Training\n📍 Located in Zirakpur\n⏰ Mon-Sat: 6AM-9PM", true);
+        setTimeout(() => {
+          askContactPreference();
+        }, 2000);
+      }, 1000);
+    });
+  };
+
+  const askExperienceLevel = () => {
+    simulateTyping(() => {
+      addMessage("Great choice! What's your current experience level?", true, [
+        { id: 'beginner', text: '🌱 Complete Beginner', action: () => handleUserChoice('experience', 'beginner') },
+        { id: 'intermediate', text: '📈 Some Experience', action: () => handleUserChoice('experience', 'intermediate') },
+        { id: 'advanced', text: '⭐ Advanced Level', action: () => handleUserChoice('experience', 'advanced') }
+      ]);
+    });
+  };
+
+  const askAgeGroup = () => {
+    simulateTyping(() => {
+      addMessage("Excellent choice! What age group are we planning for?", true, [
+        { id: 'kids', text: '👶 Kids (5-12 years)', action: () => handleUserChoice('ageGroup', 'kids') },
+        { id: 'teens', text: '🧑‍🎓 Teens (13-17 years)', action: () => handleUserChoice('ageGroup', 'teens') },
+        { id: 'adults', text: '👨‍💼 Adults (18+ years)', action: () => handleUserChoice('ageGroup', 'adults') }
+      ]);
+    });
+  };
+
+  const askContactPreference = () => {
+    simulateTyping(() => {
+      addMessage("Perfect! I'll prepare a personalized message for our team. How would you like to connect?", true, [
+        { id: 'whatsapp', text: '📱 WhatsApp (Instant)', action: () => generateWhatsAppMessage() },
+        { id: 'call', text: '📞 Schedule Call', action: () => generateCallRequest() },
+        { id: 'visit', text: '🏢 Visit Studio', action: () => generateVisitRequest() }
+      ]);
+    }, 1500);
+  };
+
+  const generateWhatsAppMessage = () => {
+    addMessage('📱 WhatsApp (Instant)', false);
+    
+    simulateTyping(() => {
+      const message = createPersonalizedMessage();
+      addMessage(`Perfect! I've created a personalized message for you. When you click the button below, it will open WhatsApp with this message ready to send:\n\n"${message}"`, true);
+      
+      setTimeout(() => {
+        addMessage("Ready to connect?", true, [
+          { 
+            id: 'send', 
+            text: '🚀 Send WhatsApp Message', 
+            action: () => {
+              const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+              window.open(url, '_blank');
+              addMessage('✅ WhatsApp opened! Send the message to connect with our team.', true);
+            }
+          },
+          { id: 'restart', text: '🔄 Start Over', action: () => restartChat() }
+        ]);
+      }, 1000);
+    }, 2000);
+  };
+
+  const generateCallRequest = () => {
+    addMessage('📞 Schedule Call', false);
+    const message = createPersonalizedMessage() + "\n\nI would prefer to schedule a phone call to discuss this further. Please let me know your available times.";
+    
+    simulateTyping(() => {
+      addMessage("I'll send a message requesting a phone call consultation.", true, [
+        { 
+          id: 'send', 
+          text: '📞 Request Call Back', 
+          action: () => {
+            const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+            addMessage('✅ Call request sent! Our team will contact you soon.', true);
+          }
+        }
+      ]);
+    });
+  };
+
+  const generateVisitRequest = () => {
+    addMessage('🏢 Visit Studio', false);
+    const message = createPersonalizedMessage() + "\n\nI would like to visit your studio to see the facilities and meet the team in person. Please let me know the best time to visit.";
+    
+    simulateTyping(() => {
+      addMessage("I'll send a message requesting a studio visit.", true, [
+        { 
+          id: 'send', 
+          text: '🏢 Request Studio Visit', 
+          action: () => {
+            const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+            addMessage('✅ Visit request sent! Our team will schedule your studio tour.', true);
+          }
+        }
+      ]);
+    });
+  };
+
+  const createPersonalizedMessage = () => {
+    const { service, danceType, fashionType, experience, ageGroup } = userResponses;
+    
+    let message = "Hello BeeStar Entertainment! 🌟\n\n";
+    message += "I'm interested in your services and would like to know more about:\n\n";
+
+    if (service === 'dance' && danceType) {
+      message += `🕺 Dance Classes - ${getChoiceText('danceType', danceType)}\n`;
+      if (experience) {
+        message += `📊 Experience Level: ${getChoiceText('experience', experience)}\n`;
+      }
+    } else if (service === 'fashion' && fashionType) {
+      message += `👗 Fashion Shows - ${getChoiceText('fashionType', fashionType)}\n`;
+      if (ageGroup) {
+        message += `👥 Age Group: ${getChoiceText('ageGroup', ageGroup)}\n`;
+      }
+    } else if (service === 'both') {
+      message += "🎭 Both Dance Classes and Fashion Shows\n";
+    } else if (service === 'info') {
+      message += "📋 General Information about your programs\n";
+    }
+
+    message += "\nPlease provide me with:\n";
+    message += "• Class schedules and timings\n";
+    message += "• Fee structure and packages\n";
+    message += "• Trial class availability\n";
+    message += "• Any current offers or discounts\n\n";
+    message += "Looking forward to joining BeeStar Entertainment family! 🎉";
+
+    return message;
+  };
+
+  const restartChat = () => {
+    setChatHistory([]);
+    setUserResponses({});
+    setCurrentStep('welcome');
+  };
 
   return (
     <>
@@ -64,7 +328,6 @@ const WhatsAppChatBot = () => {
           {isOpen ? (
             <X className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
           ) : (
-            // Real WhatsApp Logo with AI glow
             <div className="relative">
               <svg
                 className="w-7 h-7 sm:w-8 sm:h-8 text-white"
@@ -78,14 +341,12 @@ const WhatsAppChatBot = () => {
             </div>
           )}
           
-          {/* AI Notification Badge */}
           <span className="absolute -top-2 -right-2 bg-gradient-to-r from-pink-500 to-orange-500 text-white text-xs font-bold 
                           w-5 h-5 sm:w-6 sm:h-6 rounded-full flex items-center justify-center animate-bounce">
             AI
           </span>
         </button>
 
-        {/* Hover Tooltip */}
         <div className="absolute bottom-full right-0 mb-3 px-4 py-2 bg-gradient-to-r from-gray-900 to-gray-800 text-white 
                         text-sm rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 
                         transition-opacity duration-300 pointer-events-none">
@@ -95,17 +356,14 @@ const WhatsAppChatBot = () => {
         </div>
       </div>
 
-      {/* Chat Window */}
+      {/* Enhanced Chat Window */}
       {isOpen && (
         <div className="fixed inset-0 z-40 flex items-end justify-end p-4 sm:p-6 lg:p-8">
-          
-          {/* Mobile Backdrop */}
           <div 
             className="absolute inset-0 bg-black bg-opacity-30 lg:bg-transparent"
             onClick={() => setIsOpen(false)}
           />
 
-          {/* Chat Container */}
           <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-sm sm:max-w-md lg:max-w-lg 
                           max-h-[85vh] flex flex-col overflow-hidden animate-slide-in border-2 border-purple-200">
             
@@ -127,12 +385,12 @@ const WhatsAppChatBot = () => {
               
               <div className="flex-1">
                 <h3 className="font-semibold text-lg flex items-center">
-                  🤖 AI Assistant
+                  🤖 BeeStar AI Assistant
                   <span className="ml-2 text-xs bg-white/20 px-2 py-1 rounded-full">SMART</span>
                 </h3>
                 <p className="text-purple-100 text-sm flex items-center">
                   <div className="w-2 h-2 bg-green-300 rounded-full mr-2 animate-pulse"></div>
-                  Powered by AI • Always Learning
+                  Dance & Fashion Expert
                 </p>
               </div>
               
@@ -144,74 +402,58 @@ const WhatsAppChatBot = () => {
               </button>
             </div>
 
-            {/* Chat Body */}
-            <div className="flex-1 p-5 bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 overflow-y-auto">
-              
-              {/* Welcome Message */}
-              <div className="bg-white rounded-xl p-4 shadow-sm border border-purple-100 mb-5 relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-blue-500/5 to-cyan-500/5"></div>
-                <div className="flex items-start space-x-3 relative">
-                  <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <Bot className="w-4 h-4 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-gray-800 font-medium mb-1 flex items-center">
-                      Hello! I'm your AI Assistant 
-                      <Sparkles className="w-4 h-4 text-purple-500 ml-1 animate-pulse" />
-                    </p>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                      I'm here to help you 24/7 with intelligent responses. Choose from the smart options below or ask me anything!
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Service Options */}
-              <div className="space-y-3">
-                {serviceOptions.map((option, index) => (
-                  <button
-                    key={index}
-                    onClick={() => openWhatsApp(option.message)}
-                    className="w-full bg-white hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 rounded-xl p-4 border border-purple-200 
-                             transition-all duration-200 flex items-center space-x-3 text-left 
-                             hover:shadow-lg hover:border-purple-400 hover:scale-[1.02] group"
-                  >
-                    <div className="w-10 h-10 bg-gradient-to-br from-purple-100 to-blue-100 group-hover:from-purple-200 group-hover:to-blue-200 rounded-lg flex items-center justify-center text-purple-600 transition-all duration-200">
-                      {option.icon}
+            {/* Chat Messages */}
+            <div className="flex-1 p-4 bg-gradient-to-br from-purple-50 via-blue-50 to-cyan-50 overflow-y-auto max-h-96">
+              <div className="space-y-4">
+                {chatHistory.map((chat) => (
+                  <div key={chat.id} className={`flex ${chat.isBot ? 'justify-start' : 'justify-end'}`}>
+                    <div className={`max-w-[80%] ${
+                      chat.isBot 
+                        ? 'bg-white border border-purple-100 text-gray-800' 
+                        : 'bg-gradient-to-r from-purple-600 to-blue-600 text-white'
+                    } rounded-xl p-3 shadow-sm`}>
+                      <p className="text-sm whitespace-pre-line">{chat.message}</p>
+                      
+                      {chat.options && (
+                        <div className="mt-3 space-y-2">
+                          {chat.options.map((option) => (
+                            <button
+                              key={option.id}
+                              onClick={option.action}
+                              className="w-full text-left p-3 bg-gradient-to-r from-purple-50 to-blue-50 hover:from-purple-100 hover:to-blue-100 
+                                       rounded-lg border border-purple-200 transition-all duration-200 text-sm
+                                       hover:shadow-md hover:scale-[1.02] group"
+                            >
+                              <span className="text-gray-700 group-hover:text-purple-700">{option.text}</span>
+                            </button>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                    <span className="text-gray-700 font-medium group-hover:text-purple-700 transition-colors duration-200">{option.text}</span>
-                    <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                      <Sparkles className="w-4 h-4 text-purple-400" />
-                    </div>
-                  </button>
+                  </div>
                 ))}
+                
+                {isTyping && (
+                  <div className="flex justify-start">
+                    <div className="bg-white border border-purple-100 text-gray-800 rounded-xl p-3 shadow-sm">
+                      <div className="flex space-x-1">
+                        <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce"></div>
+                        <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                        <div className="w-2 h-2 bg-purple-500 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                <div ref={messagesEndRef} />
               </div>
             </div>
 
-            {/* Message Input */}
-            <div className="p-5 bg-white border-t border-purple-100">
-              <div className="flex items-center space-x-3 bg-gradient-to-r from-purple-50 to-blue-50 rounded-full p-2 border border-purple-200">
-                <input
-                  type="text"
-                  value={customMessage}
-                  onChange={(e) => setCustomMessage(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && openWhatsApp()}
-                  placeholder="Ask me anything... I'm smart! 🤖"
-                  className="flex-1 bg-transparent px-3 py-2 outline-none text-gray-700 placeholder-gray-500"
-                />
-                <button
-                  onClick={() => openWhatsApp()}
-                  disabled={!customMessage.trim()}
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:from-gray-300 disabled:to-gray-400 
-                           text-white p-2 rounded-full transition-all duration-200
-                           disabled:cursor-not-allowed transform hover:scale-105"
-                >
-                  <Send className="w-5 h-5" />
-                </button>
-              </div>
-              <p className="text-center text-xs text-purple-600 mt-3 flex items-center justify-center">
+            {/* Footer */}
+            <div className="p-4 bg-white border-t border-purple-100">
+              <p className="text-center text-xs text-purple-600 flex items-center justify-center">
                 <Bot className="w-3 h-3 mr-1" />
-                Powered by Advanced AI Technology
+                Powered by BeeStar AI Technology
                 <Sparkles className="w-3 h-3 ml-1 animate-pulse" />
               </p>
             </div>
