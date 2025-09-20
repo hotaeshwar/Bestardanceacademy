@@ -8,6 +8,7 @@ import FashionShowClass from './components/FashionShowClass';
 import ContactUs from './components/ContactUs';
 import RegistrationModal from './components/RegistrationModal';
 import Footer from './components/Footer';
+import WhatsAppChatBot from './components/WhatsAppChatBot';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dance');
@@ -113,6 +114,9 @@ function App() {
           onFashionClassClick={handleFashionClassClick}
         />
       </div>
+
+      {/* WhatsApp Chatbot - Corrected component name */}
+      <WhatsAppChatBot />
     </>
   );
 }
